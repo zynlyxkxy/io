@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>IoGroup</class>
+ <widget class="QWidget" name="IoGroup">
+  <property name="geometry">
+   <rect><x>0</x><y>0</y><width>1820</width><height>820</height></rect>
+  </property>
+  <layout class="QGridLayout" name="gridLayout">
+   <property name="leftMargin"><number>15</number></property>
+   <property name="topMargin"><number>15</number></property>
+   <property name="rightMargin"><number>15</number></property>
+   <property name="bottomMargin"><number>15</number></property>
+   <property name="spacing"><number>10</number></property>
+   <item row="0" column="0">
+    <widget class="QTabWidget" name="tbw_IO">
+     <property name="font"><font><family>Times New Roman</family><pointsize>14</pointsize></font></property>
+     <property name="currentIndex"><number>0</number></property>
+     <widget class="QWidget" name="tab_DI">
+      <attribute name="title"><string>Digital Input</string></attribute>
+      <layout class="QGridLayout" name="gridLayout_DI">
+       <property name="leftMargin"><number>10</number></property>
+       <property name="topMargin"><number>10</number></property>
+       <property name="rightMargin"><number>10</number></property>
+       <property name="bottomMargin"><number>10</number></property>
+       <item row="0" column="0">
+        <widget class="QScrollArea" name="scrollArea_DI">
+         <property name="styleSheet"><string notr="true">QWidget{background-color:transparent;}</string></property>
+         <property name="widgetResizable"><bool>true</bool></property>
+         <widget class="QWidget" name="scrollAreaWidgetContents_DI"/>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="tab_DO">
+      <attribute name="title"><string>Digital Output</string></attribute>
+      <layout class="QGridLayout" name="gridLayout_DO">
+       <property name="leftMargin"><number>10</number></property>
+       <property name="topMargin"><number>10</number></property>
+       <property name="rightMargin"><number>10</number></property>
+       <property name="bottomMargin"><number>10</number></property>
+       <item row="0" column="0">
+        <widget class="QScrollArea" name="scrollArea_DO">
+         <property name="styleSheet"><string notr="true">QWidget{background-color:transparent;}</string></property>
+         <property name="widgetResizable"><bool>true</bool></property>
+         <widget class="QWidget" name="scrollAreaWidgetContents_DO"/>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="tab_Analog">
+      <attribute name="title"><string>Analog I/O</string></attribute>
+      <layout class="QHBoxLayout" name="horizontalLayout">
+       <property name="spacing"><number>15</number></property>
+       <property name="leftMargin"><number>15</number></property>
+       <property name="topMargin"><number>15</number></property>
+       <property name="rightMargin"><number>15</number></property>
+       <property name="bottomMargin"><number>15</number></property>
+       <item>
+        <widget class="QGroupBox" name="gpb_AI">
+         <property name="title"><string>Analog Input</string></property>
+         <property name="maximumSize"><size><width>650</width><height>16777215</height></size></property>
+         <property name="font"><font><family>Times New Roman</family><pointsize>16</pointsize></font></property>
+         <layout class="QGridLayout" name="gridLayout_AI">
+          <property name="leftMargin"><number>15</number></property>
+          <property name="topMargin"><number>50</number></property>
+          <property name="rightMargin"><number>15</number></property>
+          <property name="bottomMargin"><number>15</number></property>
+          <item row="0" column="0">
+           <widget class="QScrollArea" name="scrollArea_AI">
+            <property name="styleSheet"><string notr="true">QWidget{background-color:transparent;}</string></property>
+            <property name="widgetResizable"><bool>true</bool></property>
+            <widget class="QWidget" name="scrollAreaWidgetContents_AI"/>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="gpb_AO">
+         <property name="title"><string>Analog Output</string></property>
+         <property name="font"><font><family>Times New Roman</family><pointsize>16</pointsize></font></property>
+         <layout class="QGridLayout" name="gridLayout_AO">
+          <property name="leftMargin"><number>15</number></property>
+          <property name="topMargin"><number>50</number></property>
+          <property name="rightMargin"><number>15</number></property>
+          <property name="bottomMargin"><number>15</number></property>
+          <item row="0" column="0">
+           <widget class="QScrollArea" name="scrollArea_AO">
+            <property name="styleSheet"><string notr="true">QWidget{background-color:transparent;}</string></property>
+            <property name="widgetResizable"><bool>true</bool></property>
+            <widget class="QWidget" name="scrollAreaWidgetContents_AO"/>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+</ui>

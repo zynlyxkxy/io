@@ -1,0 +1,90 @@
+{
+    // 只调 scripts\ 下的脚本，没有绝对路径。
+    // _SCRIPT_NO_HOLD=1 让脚本不要停在"请按任意键继续"，否则任务会挂住。
+    //
+    // "build: <exe> (debug/release)" 这几个任务带 -t，只构建那一个 target：
+    // 调试时按 F5 另一个配置，如果 preLaunchTask 去构建**全部** target，就会
+    // 重链正在运行的那个 exe，报 LNK1168 并导致这次启动被掐掉。
+    // launch.json 里每个配置用各自的那条任务。
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build: debug",
+            "type": "shell",
+            "command": "scripts\\build-debug.bat",
+            "options": { "cwd": "${workspaceFolder}", "env": { "_SCRIPT_NO_HOLD": "1" } },
+            "group": { "kind": "build", "isDefault": true },
+            "presentation": { "reveal": "always", "panel": "shared", "clear": true },
+            "problemMatcher": ["$msCompile"]
+        },
+        {
+            "label": "build: release",
+            "type": "shell",
+            "command": "scripts\\build-release.bat",
+            "options": { "cwd": "${workspaceFolder}", "env": { "_SCRIPT_NO_HOLD": "1" } },
+            "group": "build",
+            "presentation": { "reveal": "always", "panel": "shared", "clear": true },
+            "problemMatcher": ["$msCompile"]
+        },
+        {
+            "label": "build: CTL_MDL_IO (debug)",
+            "type": "shell",
+            "command": "scripts\\build-debug.bat",
+            "args": ["-t", "CTL_MDL_IO"],
+            "options": { "cwd": "${workspaceFolder}", "env": { "_SCRIPT_NO_HOLD": "1" } },
+            "presentation": { "reveal": "always", "panel": "shared", "clear": true },
+            "problemMatcher": ["$msCompile"]
+        },
+        {
+            "label": "build: GUI_MDL_IO (debug)",
+            "type": "shell",
+            "command": "scripts\\build-debug.bat",
+            "args": ["-t", "GUI_MDL_IO"],
+            "options": { "cwd": "${workspaceFolder}", "env": { "_SCRIPT_NO_HOLD": "1" } },
+            "presentation": { "reveal": "always", "panel": "shared", "clear": true },
+            "problemMatcher": ["$msCompile"]
+        },
+        {
+            "label": "build: CTL_MDL_IO (release)",
+            "type": "shell",
+            "command": "scripts\\build-release.bat",
+            "args": ["-t", "CTL_MDL_IO"],
+            "options": { "cwd": "${workspaceFolder}", "env": { "_SCRIPT_NO_HOLD": "1" } },
+            "presentation": { "reveal": "always", "panel": "shared", "clear": true },
+            "problemMatcher": ["$msCompile"]
+        },
+        {
+            "label": "build: GUI_MDL_IO (release)",
+            "type": "shell",
+            "command": "scripts\\build-release.bat",
+            "args": ["-t", "GUI_MDL_IO"],
+            "options": { "cwd": "${workspaceFolder}", "env": { "_SCRIPT_NO_HOLD": "1" } },
+            "presentation": { "reveal": "always", "panel": "shared", "clear": true },
+            "problemMatcher": ["$msCompile"]
+        },
+        {
+            "label": "clean",
+            "type": "shell",
+            "command": "scripts\\clean.bat",
+            "options": { "cwd": "${workspaceFolder}", "env": { "_SCRIPT_NO_HOLD": "1" } },
+            "presentation": { "reveal": "always", "panel": "shared", "clear": true },
+            "problemMatcher": []
+        },
+        {
+            "label": "sync protocol -> mctrl",
+            "type": "shell",
+            "command": "scripts\\sync.bat",
+            "options": { "cwd": "${workspaceFolder}", "env": { "_SCRIPT_NO_HOLD": "1" } },
+            "presentation": { "reveal": "always", "panel": "shared", "clear": true },
+            "problemMatcher": []
+        },
+        {
+            "label": "update platform",
+            "type": "shell",
+            "command": "scripts\\update_platform.bat",
+            "options": { "cwd": "${workspaceFolder}", "env": { "_SCRIPT_NO_HOLD": "1" } },
+            "presentation": { "reveal": "always", "panel": "shared", "clear": true },
+            "problemMatcher": []
+        }
+    ]
+}

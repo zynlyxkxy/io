@@ -1,0 +1,149 @@
+{
+    // ============================================================
+    //  IntelliSense 配置（module/io）
+    //
+    //  两个配置，命令面板 "C/C++: Select a Configuration..." 切换。
+    //
+    //  ① "io (CMake Tools)"  ← 默认。**仓库里零本机路径，同事不用改任何东西。**
+    //     路径、宏、以及"用哪个编译器"全部由 CMake 提供（cpptools 通过
+    //     CMake Tools 扩展读 build\.cmake\api\v1\reply\* 与 CMake 的 kit）。
+    //     CMake 自己会用 vswhere/注册表找到本机的 Visual Studio，所以每台机器
+    //     都不用配编译器 —— 这就是躲开"每人改一行"的答案。
+    //     要求：装 CMake Tools 扩展（仓库 .vscode\extensions.json 已推荐），
+    //           并在本工程 configure 过一次（打开工程时 configureOnOpen 会做；
+    //           clean.bat 删掉 build\ 之后，执行一次 "CMake: Configure"）。
+    //
+    //  ② "io (static)"       ← 兜底。不依赖任何扩展，路径逐条写死。
+    //     它里面**不写 compilerPath**：系统头（<iostream>/<type_traits>/…）由
+    //     cpptools 自己探测的编译器提供。探测不到时（本机就是这种情况：注册表
+    //     SxS\VS7 里只有 VS2015 残留，cpptools 认不到 D:\VS2019 的 VS2019），
+    //     在你自己的【用户设置】里加一行 —— 机器相关的东西放用户设置，不进仓库：
+    //         "C_Cpp.default.compilerPath": "D:/VS2019/2019/Community/VC/Tools/MSVC/14.29.30133/bin/Hostx64/x64/cl.exe"
+    //     或命令面板 "C/C++: Select IntelliSense Configuration..." 手动挑一个。
+    //     说明：C++ IDE 都必须被告知用哪个编译器（Qt Creator 里那叫 Kit），
+    //     无法凭 includePath 绕过；把它放用户设置就能做到"每台机器一次、仓库不动"。
+    // ============================================================
+    "version": 4,
+    "configurations": [
+        {
+            // 默认：全自动，仓库零本机路径
+            "name": "io (CMake Tools)",
+            "configurationProvider": "ms-vscode.cmake-tools",
+            "intelliSenseMode": "windows-msvc-x64",
+            "cStandard": "c17",
+            "cppStandard": "c++17"
+        },
+        {
+            // 兜底：不装扩展也能用（系统头按文件头说明在用户设置里补编译器）
+            "name": "io (static)",
+            "intelliSenseMode": "windows-msvc-x64",
+            "cStandard": "c17",
+            "cppStandard": "c++17",
+            // "compilerPath": ${env:VCToolsInstallDir}bin/Hostx64/x64/cl.exe  （可选）
+
+            "includePath": [
+                // ---- 本工程源码与手写协议头 ----
+                "${workspaceFolder}/interface/include",
+                "${workspaceFolder}/MainProject",
+                "${workspaceFolder}/MainProject/AcsModule",
+                "${workspaceFolder}/MainProject/PlcModule",
+                "${workspaceFolder}/MainProject/AcsModule/AcsClient/acs/include",
+                "${workspaceFolder}/GUI",
+
+                // ---- 平台基础库头文件（basiclibrary_output 子模块）----
+                "${workspaceFolder}/basiclibrary_output/include/common/include",
+                "${workspaceFolder}/basiclibrary_output/include/istarlog/include",
+                "${workspaceFolder}/basiclibrary_output/include/istarmw/include",
+                "${workspaceFolder}/basiclibrary_output/include/istaryaml/include",
+                "${workspaceFolder}/basiclibrary_output/include/istargf/include",
+                "${workspaceFolder}/basiclibrary_output/include/istarthreadpool/include",
+                "${workspaceFolder}/basiclibrary_output/include/istarserializer/include",
+                "${workspaceFolder}/basiclibrary_output/include/istarsm/include",
+                "${workspaceFolder}/basiclibrary_output/include/istarcsv/include",
+                "${workspaceFolder}/basiclibrary_output/include/istarencryption/include",
+                "${workspaceFolder}/basiclibrary_output/include/istarfilesystem/include",
+                "${workspaceFolder}/basiclibrary_output/include/istarzmqworker/include",
+
+                // ---- 生成物：RPC 生成头（决策 B：只落 build 树）----
+                "${workspaceFolder}/build/gen/io/include",
+                // ---- AUTOMOC / AUTOUIC 生成物（moc_*.cpp / ui_*.h）----
+                "${workspaceFolder}/build/MainProject/CTL_MDL_IO_autogen/include_Debug",
+                "${workspaceFolder}/build/MainProject/CTL_MDL_IO_autogen/include_Release",
+                "${workspaceFolder}/build/GUI/GUI_MDL_IO_autogen/include_Debug",
+                "${workspaceFolder}/build/GUI/GUI_MDL_IO_autogen/include_Release",
+
+                // ---- Qt5：环境变量优先，再 4 个标准安装位置（与旧脚本一致）----
+                "${env:QTDIR}/include",
+                "${env:QTDIR}/include/QtCore",
+                "${env:QTDIR}/include/QtGui",
+                "${env:QTDIR}/include/QtWidgets",
+                "${env:QTDIR}/include/QtNetwork",
+                "${env:QTDIR}/include/QtANGLE",
+                "${env:QTDIR}/mkspecs/win32-msvc",
+
+                "D:/Qt/Qt5.12.12/5.12.12/msvc2017_64/include",
+                "D:/Qt/Qt5.12.12/5.12.12/msvc2017_64/include/QtCore",
+                "D:/Qt/Qt5.12.12/5.12.12/msvc2017_64/include/QtGui",
+                "D:/Qt/Qt5.12.12/5.12.12/msvc2017_64/include/QtWidgets",
+                "D:/Qt/Qt5.12.12/5.12.12/msvc2017_64/include/QtNetwork",
+                "D:/Qt/Qt5.12.12/5.12.12/msvc2017_64/include/QtANGLE",
+                "D:/Qt/Qt5.12.12/5.12.12/msvc2017_64/mkspecs/win32-msvc",
+
+                "C:/Qt/Qt5.12.12/5.12.12/msvc2017_64/include",
+                "C:/Qt/Qt5.12.12/5.12.12/msvc2017_64/include/QtCore",
+                "C:/Qt/Qt5.12.12/5.12.12/msvc2017_64/include/QtGui",
+                "C:/Qt/Qt5.12.12/5.12.12/msvc2017_64/include/QtWidgets",
+                "C:/Qt/Qt5.12.12/5.12.12/msvc2017_64/include/QtNetwork",
+                "C:/Qt/Qt5.12.12/5.12.12/msvc2017_64/include/QtANGLE",
+                "C:/Qt/Qt5.12.12/5.12.12/msvc2017_64/mkspecs/win32-msvc",
+
+                "D:/Qt/5.15.2/msvc2019_64/include",
+                "D:/Qt/5.15.2/msvc2019_64/include/QtCore",
+                "D:/Qt/5.15.2/msvc2019_64/include/QtGui",
+                "D:/Qt/5.15.2/msvc2019_64/include/QtWidgets",
+                "D:/Qt/5.15.2/msvc2019_64/include/QtNetwork",
+                "D:/Qt/5.15.2/msvc2019_64/include/QtANGLE",
+                "D:/Qt/5.15.2/msvc2019_64/mkspecs/win32-msvc",
+
+                "C:/Qt/5.15.2/msvc2019_64/include",
+                "C:/Qt/5.15.2/msvc2019_64/include/QtCore",
+                "C:/Qt/5.15.2/msvc2019_64/include/QtGui",
+                "C:/Qt/5.15.2/msvc2019_64/include/QtWidgets",
+                "C:/Qt/5.15.2/msvc2019_64/include/QtNetwork",
+                "C:/Qt/5.15.2/msvc2019_64/include/QtANGLE",
+                "C:/Qt/5.15.2/msvc2019_64/mkspecs/win32-msvc",
+
+                // ---- 最后的兜底（cpptools 的 includePath 支持 ** 递归）----
+                "${workspaceFolder}/**"
+            ],
+
+            // 与构建一致：MSVC 默认的 WIN32/_WINDOWS/UNICODE/_UNICODE，
+            // 共享模块加的 _HAS_STD_BYTE=0，以及各 target 的编译定义。
+            "defines": [
+                "WIN32",
+                "_WINDOWS",
+                "UNICODE",
+                "_UNICODE",
+                "_HAS_STD_BYTE=0",
+                "ISTAR_BUILDING",
+                "IO_LOCAL_DEBUG",
+                "QT_CORE_LIB",
+                "QT_NETWORK_LIB",
+                "QT_GUI_LIB",
+                "QT_WIDGETS_LIB"
+            ],
+
+            "browse": {
+                "path": [
+                    "${workspaceFolder}/interface/include",
+                    "${workspaceFolder}/MainProject",
+                    "${workspaceFolder}/GUI",
+                    "${workspaceFolder}/basiclibrary_output/include",
+                    "${workspaceFolder}/build/gen",
+                    "${workspaceFolder}"
+                ],
+                "limitSymbolsToIncludedHeaders": false
+            }
+        }
+    ]
+}

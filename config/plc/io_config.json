@@ -1,0 +1,54 @@
+{
+  "machineParts": [
+    {
+      "fullPath": "3000_1_Controller/SystemMachine/SS_ME/M_MachineAirCabinet",
+
+      "DI": [
+        { "id": 2000, "name": "oYN_XN_WithChip" },
+        { "id": 2001, "name": "oYP_XN_WithChip" }
+      ]
+    },
+    {
+      "fullPath": "3000_1_Controller/SystemMachine/SS_ME/M_MachineAirCabinet/BH_Chip_YN_XN_SuckerVac",
+
+      "DO": [
+        { "id": 6000, "name": "Close",        "label": "BH_YN_XN_Close",        "observer": "AirRouteClose" },
+        { "id": 6001, "name": "OpenNegative", "label": "BH_YN_XN_OpenNegative", "observer": "AirRouteNegative" }
+      ],
+
+      "Cmd": [
+        { "id": 10000, "name": "ResetError",   "args": [] },
+        { "id": 10001, "name": "MoveStageAbs", "args": ["X", "Y", "Rz"] }
+      ]
+    },
+    {
+      "fullPath": "3000_1_Controller/SystemMachine/SS_ME/M_MachineAirCabinet/FA_ChipSuckerVacuum",
+
+      "SettingDouble": [
+        { "id": 8000, "name": "AirPressure_Limit" },
+        { "id": 8001, "name": "Vacuum_Threshold" }
+      ],
+
+      "SettingBool": [
+        { "id": 8100, "name": "AutoClean_Enable" },
+        { "id": 8101, "name": "Alarm_Enable" }
+      ]
+    },
+    {
+      "fullPath": "3000_1_Controller/SystemMachine/SS_Bonding/M_WS_STAGE/Interferometer",
+
+      "AI": [
+        { "id": 0, "name": "oUI_Xg" },
+        { "id": 1, "name": "oUI_Yg" }
+      ]
+    },
+    {
+      "fullPath": "3000_1_Controller/SystemMachine/SS_Bonding/M_WS_STAGE/E_WS_STAGE_Horizontal",
+
+      "AO": [
+        { "id": 4000, "name": "X_Move",  "observer": "oX_TargetPosition" },
+        { "id": 4001, "name": "Y_Move",  "observer": "oY_TargetPosition" }
+      ]
+    }
+  ]
+}

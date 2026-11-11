@@ -1,0 +1,28 @@
+{
+  "AI": [
+    { "id": 1000, "name": "CurrentCycles" }
+  ],
+
+  "DI": [
+    { "id": 3000, "name": "WS_HorizontalMoveFinish" },
+    { "id": 3001, "name": "DriveCycleFinish" },
+    { "id": 3002, "name": "BondingProcess_YN_XP" },
+    { "id": 3003, "name": "BondingProcess_YP_XN" },
+    { "id": 3004, "name": "BondingProcess_YP_XP" }
+  ],
+
+  "AO": [
+    { "id": 5000, "name": "TargetX" },
+    { "id": 5001, "name": "TargetY" }
+  ],
+
+  "DO": [
+    { "id": 7000, "name": "PreciousAlignFinish" }
+  ],
+
+  "Buffer": [
+    { "id": 9000, "bufferId": 14 },
+    { "id": 9001, "bufferId": 20 },
+    { "id": 9002, "bufferId": 21 }
+  ]
+}
